@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Encargo · pedidos abiertos para tu colonia</title>
+<meta name="description" content="Publica lo que necesitas llevar, un repartidor cercano lo toma y le pagas directo. Sin comisiones. Regístrate para la prueba.">
+<meta name="theme-color" content="#FFC20E">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Encargo · pedidos abiertos, sin comisiones">
+<meta property="og:description" content="Publica lo que necesitas llevar, un repartidor cercano lo toma y le pagas directo. Regístrate para la prueba.">
+<meta property="og:image" content="https://rigo9412.github.io/encargo/assets/img/og.png">
+<meta property="og:url" content="https://rigo9412.github.io/encargo/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="assets/fonts/bricolage-grotesque-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23FFC20E'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Arial Black,Arial' font-weight='900' font-size='19' fill='%230B1412'%3EE%3C/text%3E%3C/svg%3E">
+<style>
+@font-face{font-family:"Bricolage Grotesque";font-weight:800;font-display:swap;src:url(assets/fonts/bricolage-grotesque-latin-800-normal.woff2) format("woff2")}
+@font-face{font-family:"Public Sans";font-weight:400;font-display:swap;src:url(assets/fonts/public-sans-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"Public Sans";font-weight:600;font-display:swap;src:url(assets/fonts/public-sans-latin-600-normal.woff2) format("woff2")}
+@font-face{font-family:"Public Sans";font-weight:700;font-display:swap;src:url(assets/fonts/public-sans-latin-700-normal.woff2) format("woff2")}
+@font-face{font-family:"JetBrains Mono";font-weight:500;font-display:swap;src:url(assets/fonts/jetbrains-mono-latin-500-normal.woff2) format("woff2")}
+
+/* Layout: titular grande sobre bloque amarillo "chaleco" con teléfonos; secciones a una columna en celular, dos en escritorio */
+:root{
+  --bg:#F4F6F5; --surface:#FFFFFF; --sunk:#E3E9E6; --line:#B7C3BE;
+  --ink:#0B1412; --muted:#3D4A45;
+  --vest:#FFC20E; --vest-ink:#1A1400; --route:#005C4B; --route-soft:#D0ECE3;
+  --ok:#146B3A; --bad:#A3221A; --ok-bg:#DAF0E2; --bad-bg:#F8DCD8;
+  --f-display:"Bricolage Grotesque","Arial Black","Arial Narrow",system-ui,sans-serif;
+  --f-body:"Public Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0A0F0E; --surface:#131B19; --sunk:#1C2724; --line:#3A4A45;
+  --ink:#F2F6F4; --muted:#B6C3BE;
+  --vest:#FFC933; --vest-ink:#1A1400; --route:#5FD4B6; --route-soft:#12382F;
+  --ok:#6EDB9A; --bad:#FF8C82; --ok-bg:#14341F; --bad-bg:#3F1916; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0A0F0E; --surface:#131B19; --sunk:#1C2724; --line:#3A4A45;
+  --ink:#F2F6F4; --muted:#B6C3BE;
+  --vest:#FFC933; --vest-ink:#1A1400; --route:#5FD4B6; --route-soft:#12382F;
+  --ok:#6EDB9A; --bad:#FF8C82; --ok-bg:#14341F; --bad-bg:#3F1916; color-scheme:dark}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.55 var(--f-body);padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:20px}
+h1,h2,h3{font-family:var(--f-display);font-weight:800;letter-spacing:-.02em;line-height:1.02;margin:0;text-wrap:balance}
+h2{font-size:clamp(30px,5.4vw,48px)}
+h3{font-size:22px;letter-spacing:-.01em;line-height:1.15}
+p{margin:0;max-width:62ch}
+.eyebrow{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--route)}
+.muted{color:var(--muted)}
+:focus-visible{outline:3px solid var(--route);outline-offset:3px}
+
+/* barra */
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:16px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--f-display);font-weight:800;font-size:24px;letter-spacing:-.02em}
+.logo i{width:34px;height:34px;border-radius:8px;background:var(--vest);color:var(--vest-ink);display:grid;place-items:center;font-style:normal;font-size:20px}
+.tag{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border:2px solid var(--ink);border-radius:999px;padding:3px 10px;white-space:nowrap}
+
+/* botones */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:0 22px;border-radius:12px;font:700 17px/1 var(--f-body);text-decoration:none;border:2px solid var(--ink);background:var(--surface);color:var(--ink);cursor:pointer}
+.btn.solid{background:var(--ink);color:var(--bg)}
+.btn.vest{background:var(--vest);color:var(--vest-ink);border-color:var(--vest-ink)}
+.btn:hover{transform:translateY(-1px)}
+.btn:active{transform:none}
+
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:40px;align-items:center;padding-block:28px 64px}
+.hero h1{font-size:clamp(44px,8.6vw,92px)}
+.hero h1 mark{background:var(--vest);color:var(--vest-ink);padding:0 .12em;border-radius:.12em;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.hero .lead{font-size:clamp(18px,2.2vw,21px);margin-top:20px;color:var(--muted)}
+.hero .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.facts{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:28px;padding:0;list-style:none;font-weight:600;font-size:15px}
+.facts li{display:flex;align-items:center;gap:8px}
+.facts li::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--route)}
+.stage{position:relative;background:var(--vest);border-radius:28px;padding:28px 0 0;min-height:420px;overflow:hidden;display:flex;justify-content:center;align-items:flex-end;gap:0}
+.stage::after{content:"";position:absolute;inset:auto 0 0 0;height:56px;background:linear-gradient(transparent,rgba(0,0,0,.06))}
+.phone{width:min(58%,270px);border:3px solid var(--vest-ink);border-bottom:0;border-radius:30px 30px 0 0;overflow:hidden;background:#fff;box-shadow:0 0 0 6px var(--vest-ink)}
+.phone img{width:100%;aspect-ratio:390/600;object-fit:cover;object-position:top}
+.stage .phone.back img{object-position:50% 70%}
+.stage .phone.back{transform:translate(18%,22px) rotate(-5deg);z-index:0;opacity:.95}
+.stage .phone.front{transform:translate(-14%,0);z-index:1}
+.stage .chip{position:absolute;z-index:2;background:var(--surface);color:var(--ink);border:2px solid var(--vest-ink);border-radius:999px;padding:6px 12px;font-size:13px;font-weight:700;box-shadow:3px 3px 0 var(--vest-ink)}
+.stage .c1{top:22px;left:16px}
+.stage .c2{top:84px;right:14px}
+
+/* pasos */
+section{padding-block:64px}
+.band{background:var(--surface);border-block:1px solid var(--line)}
+.head{display:flex;flex-direction:column;gap:12px;margin-bottom:34px}
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;list-style:none;padding:0;margin:0;counter-reset:s}
+.steps li{counter-increment:s;border-top:4px solid var(--ink);padding-top:14px;display:flex;flex-direction:column;gap:8px}
+.steps li::before{content:counter(s);font-family:var(--f-display);font-weight:800;font-size:40px;line-height:1;color:var(--route)}
+.steps p{color:var(--muted);font-size:16px}
+
+/* bloques de audiencia */
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:center}
+.split.flip .shot{order:-1}
+.list{list-style:none;padding:0;margin:24px 0 0;display:flex;flex-direction:column;gap:16px}
+.list li{display:grid;grid-template-columns:28px 1fr;gap:12px}
+.list li b{display:block;font-size:18px}
+.list li span{color:var(--muted);font-size:16px}
+.tick{width:28px;height:28px;border-radius:8px;background:var(--route-soft);color:var(--route);display:grid;place-items:center;font-weight:800}
+.shot{display:flex;justify-content:center;gap:16px}
+.shot figure{margin:0;width:min(100%,300px);display:flex;flex-direction:column;gap:10px}
+.shot .frame{border:3px solid var(--ink);border-radius:26px;overflow:hidden;background:#fff}
+.shot .frame img{width:100%;aspect-ratio:390/720;object-fit:cover;object-position:top}
+.shot figcaption{font-size:14px;color:var(--muted);text-align:center}
+.cta-inline{margin-top:28px}
+
+/* confianza */
+.levels{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:8px}
+.lv{border:2px solid var(--line);border-radius:14px;padding:16px;background:var(--bg);display:flex;flex-direction:column;gap:8px}
+.lv .n{display:flex;align-items:center;gap:10px;font-family:var(--f-display);font-weight:800;font-size:20px}
+.lv .n i{font-style:normal;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--vest);color:var(--vest-ink)}
+.lv:first-child .n i{background:var(--sunk);color:var(--ink)}
+.lv small{font-weight:700;font-size:14px}
+.lv p{font-size:15px;color:var(--muted)}
+.trust{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:40px;align-items:start;margin-top:48px}
+.hash{font-family:var(--f-mono);font-size:13px;background:var(--sunk);border-radius:10px;padding:14px;line-height:1.7;overflow-x:auto;white-space:nowrap}
+.hash b{color:var(--route);font-weight:500}
+
+/* preguntas */
+.faq{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 32px}
+details{border-bottom:2px solid var(--line);padding-block:14px}
+summary{cursor:pointer;font-weight:700;font-size:18px;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:var(--f-display);font-size:24px;line-height:1;color:var(--route)}
+details[open] summary::after{content:"–"}
+details p{margin-top:10px;color:var(--muted);font-size:16px}
+
+/* formulario */
+.join{background:#0B1412;color:#F2F6F4;border-top:1px solid #3A4A45}
+.join .eyebrow{color:#FFC20E}
+.join .grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:48px;align-items:start}
+.join p.muted{color:#B6C3BE}
+form{background:var(--surface);color:var(--ink);border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:18px}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:6px;background:var(--sunk);border-radius:12px;padding:5px}
+.seg label{position:relative}
+.seg input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.seg span{display:flex;align-items:center;justify-content:center;min-height:48px;border-radius:9px;font-weight:700;text-align:center;padding:4px 8px}
+.seg input:checked+span{background:var(--surface);box-shadow:0 0 0 2px var(--ink)}
+.seg input:focus-visible+span{outline:3px solid var(--route);outline-offset:2px}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.f{display:flex;flex-direction:column;gap:6px;min-width:0}
+.f.full{grid-column:1/-1}
+.f>span{font-weight:700;font-size:15px}
+.f small{color:var(--muted);font-size:13px}
+input[type=text],input[type=tel],select{font:inherit;font-size:17px;min-height:50px;padding:10px 12px;border:2px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);width:100%;min-width:0}
+input:focus,select:focus{border-color:var(--ink);outline:none}
+fieldset{border:0;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;min-width:0}
+legend{font-weight:700;font-size:15px;margin-bottom:8px;padding:0}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opts label{position:relative}
+.opts input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.opts span{display:inline-flex;align-items:center;min-height:42px;padding:0 14px;border:2px solid var(--line);border-radius:999px;font-weight:600;font-size:15px}
+.opts input:checked+span{border-color:var(--ink);background:var(--vest);color:var(--vest-ink)}
+.opts input:focus-visible+span{outline:3px solid var(--route);outline-offset:2px}
+.consent{display:grid;grid-template-columns:24px 1fr;gap:10px;font-size:14px;color:var(--muted);align-items:start}
+.consent input{width:22px;height:22px;margin:1px 0 0;accent-color:var(--route)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.msg{border-radius:12px;padding:14px 16px;font-weight:600}
+.msg.ok{background:var(--ok-bg);color:var(--ok)}
+.msg.err{background:var(--bad-bg);color:var(--bad)}
+.share{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:10px}
+.share code{font-family:var(--f-mono);font-size:14px;background:var(--sunk);padding:8px 10px;border-radius:8px;overflow-wrap:anywhere}
+
+footer{padding-block:36px 48px;font-size:14px;color:var(--muted)}
+footer .wrap{display:flex;flex-direction:column;gap:14px}
+footer h3{font-size:18px;color:var(--ink)}
+footer p{max-width:80ch}
+
+@media (max-width:900px){
+  .hero,.split,.trust,.join .grid{grid-template-columns:1fr}
+  .split.flip .shot{order:0}
+  .steps,.levels{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .faq{grid-template-columns:1fr}
+  .stage{min-height:360px}
+}
+@media (max-width:520px){
+  body{font-size:16px}
+  .wrap{padding-inline:16px}
+  section{padding-block:48px}
+  .hero{padding-block:12px 48px;gap:32px}
+  .hero .cta .btn{flex:1 1 100%}
+  .steps{grid-template-columns:1fr}
+  .levels{grid-template-columns:1fr 1fr}
+  .fields{grid-template-columns:1fr}
+  form{padding:18px}
+  .shot figure{width:min(100%,260px)}
+  .shot{gap:10px}
+  .tag{display:none}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn:hover{transform:none}}
+</style>
+</head>
+<body>
+
+<header class="wrap top">
+  <a class="logo" href="#"><i>E</i>Encargo</a>
+  <span class="tag">Prueba piloto · nombre temporal</span>
+</header>
+
+<main>
+<div class="wrap hero">
+  <div>
+    <h1>Pedidos abiertos para tu colonia. <mark>Sin comisiones.</mark></h1>
+    <p class="lead">Publicas lo que necesitas llevar, un repartidor cercano lo toma y le pagas directo a él. Estamos juntando interés para lanzar la primera prueba.</p>
+    <div class="cta">
+      <a class="btn vest" href="#unete" data-perfil="repartidor">Quiero repartir</a>
+      <a class="btn solid" href="#unete" data-perfil="cliente">Quiero enviar o pedir</a>
+    </div>
+    <ul class="facts">
+      <li>0% de comisión por viaje</li>
+      <li>Pagas en efectivo o transferencia</li>
+      <li>Código abierto</li>
+    </ul>
+  </div>
+  <div class="stage" aria-hidden="true">
+    <span class="chip c1">Ubicación en vivo</span>
+    <span class="chip c2">$45 de envío, directo</span>
+    <div class="phone back"><img src="assets/img/rastreo.webp" alt="" width="780" height="1688" loading="eager"></div>
+    <div class="phone front"><img src="assets/img/tablero.webp" alt="" width="780" height="1688" loading="eager"></div>
+  </div>
+</div>
+
+<section class="band" id="como">
+  <div class="wrap">
+    <div class="head"><span class="eyebrow">Cómo funciona</span><h2>Un tablero público de pedidos</h2>
+      <p class="muted">Cualquiera ve los pedidos disponibles por colonia. Las direcciones exactas solo las ve quien toma el pedido.</p></div>
+    <ol class="steps">
+      <li><h3>Publicas</h3><p>Qué se lleva, de qué colonia a cuál y cuánto pagas por el envío.</p></li>
+      <li><h3>Alguien lo toma</h3><p>Un repartidor cercano lo acepta y en ese momento ve los datos completos.</p></li>
+      <li><h3>Lo sigues en vivo</h3><p>Ves en el mapa dónde va tu pedido mientras está activo.</p></li>
+      <li><h3>Pagas directo</h3><p>Efectivo, SPEI o transferencia al celular. La plataforma no toca el dinero.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section id="repartidores">
+  <div class="wrap split">
+    <div>
+      <span class="eyebrow">Para repartidores</span>
+      <h2>Lo que cobras es tuyo, completo</h2>
+      <ul class="list">
+        <li><span class="tick">✓</span><div><b>Sin comisión</b><span>El pago del envío te lo da el cliente directo, en efectivo o transferencia.</span></div></li>
+        <li><span class="tick">✓</span><div><b>Tú eliges qué tomar</b><span>Ves el pago, la distancia y la reputación de quien publica antes de aceptar.</span></div></li>
+        <li><span class="tick">✓</span><div><b>Navegas con tu app de siempre</b><span>Un toque abre la ruta en Google Maps, Waze o Apple Maps.</span></div></li>
+        <li><span class="tick">✓</span><div><b>Tu reputación te sigue</b><span>Cada viaje bien hecho te quita requisitos y te deja tomar pedidos de más valor.</span></div></li>
+      </ul>
+      <div class="cta-inline"><a class="btn vest" href="#unete" data-perfil="repartidor">Quiero repartir</a></div>
+    </div>
+    <div class="shot">
+      <figure><div class="frame"><img src="assets/img/repartidor.webp" alt="Pantalla del repartidor con botones para abrir la ruta en Google Maps, Waze y Apple Maps" width="780" height="1688" loading="lazy"></div><figcaption>Vista del repartidor con un pedido tomado</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="clientes">
+  <div class="wrap split flip">
+    <div>
+      <span class="eyebrow">Para clientes y negocios</span>
+      <h2>Para lo que vendes por WhatsApp o lo que se te olvidó</h2>
+      <ul class="list">
+        <li><span class="tick">✓</span><div><b>Tú pones el precio del envío</b><span>Sin tarifas escondidas ni cargos extra por usar la plataforma.</span></div></li>
+        <li><span class="tick">✓</span><div><b>Recoger algo ya pagado</b><span>Un pastel, una venta de Marketplace, un paquete. El repartidor solo lo recoge y lo lleva.</span></div></li>
+        <li><span class="tick">✓</span><div><b>O que te lo compren</b><span>Despensa, farmacia o un mandado. Con usuarios nuevos se paga el producto por adelantado.</span></div></li>
+        <li><span class="tick">✓</span><div><b>Códigos para recoger y entregar</b><span>El paquete solo se entrega a quien tiene el código correcto.</span></div></li>
+      </ul>
+      <div class="cta-inline"><a class="btn solid" href="#unete" data-perfil="cliente">Quiero enviar o pedir</a></div>
+    </div>
+    <div class="shot">
+      <figure><div class="frame"><img src="assets/img/rastreo.webp" alt="Mapa con la ubicación en vivo del repartidor camino al punto de recolección" width="780" height="1688" loading="lazy"></div><figcaption>El cliente ve al repartidor en el mapa</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="confianza">
+  <div class="wrap">
+    <div class="head"><span class="eyebrow">Confianza</span><h2>Todos empiezan en cero</h2>
+      <p class="muted">No hay cuentas verificadas por pago ni insignias compradas. La confianza se gana con viajes bien hechos, y en cada pedido se aplica el nivel más bajo de las dos partes.</p></div>
+    <div class="levels">
+      <div class="lv"><span class="n"><i>0</i>Nuevo</span><small>Al registrarte con tu celular</small><p>Códigos al recoger y entregar, foto del paquete y ubicación en vivo. Pedidos de hasta $500.</p></div>
+      <div class="lv"><span class="n"><i>1</i>Conocido</span><small>5 viajes exitosos</small><p>Ya no se pide la foto. Pedidos de hasta $2,000.</p></div>
+      <div class="lv"><span class="n"><i>2</i>Confiable</span><small>20 viajes con 10+ personas</small><p>Sin código de entrega entre usuarios de este nivel. Hasta $8,000.</p></div>
+      <div class="lv"><span class="n"><i>3</i>Veterano</span><small>50 viajes y 4.5 de calificación</small><p>Solo ubicación en vivo. Sin tope de valor.</p></div>
+    </div>
+    <div class="trust">
+      <div>
+        <h3>Si algo sale mal, todo quedó registrado</h3>
+        <p class="muted" style="margin-top:12px">Cada paso de un pedido se guarda con hora, dispositivo y ubicación en una bitácora que no se puede editar. Cada registro lleva la huella del anterior, así que si alguien cambia uno, se nota. Con eso se resuelven las disputas, y quien falla regresa a nivel 0.</p>
+        <div class="hash" style="margin-top:20px" aria-label="Ejemplo de bitácora">
+          #10 Pedido tomado · 10:09:43 · <b>64d1baac2e…</b><br>
+          #11 Ubicación en vivo · 10:09:43 · <b>a46e9d8f…</b><br>
+          #12 Pedido recogido · 10:21:05 · <b>c03f71e2…</b>
+        </div>
+      </div>
+      <div class="shot">
+        <figure><div class="frame"><img src="assets/img/auditoria.webp" alt="Bitácora de auditoría con la cadena verificada" width="780" height="1688" loading="lazy"></div><figcaption>Bitácora verificable de cada pedido</figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="preguntas">
+  <div class="wrap">
+    <div class="head"><span class="eyebrow">Preguntas</span><h2>Lo que nos preguntan</h2></div>
+    <div class="faq">
+      <details><summary>¿Cuánto cuesta usarlo?</summary><p>Hoy nada. Más adelante podría haber una membresía para entrar a la red, pero nunca una comisión por pedido.</p></details>
+      <details><summary>¿Ya funciona?</summary><p>Hay un prototipo funcionando, como el de las capturas. Con este registro medimos si hay suficientes repartidores y clientes en una misma zona para lanzar la prueba.</p></details>
+      <details><summary>¿En qué ciudad empieza?</summary><p>En la que junte más registros de los dos lados. Por eso te pedimos tu ciudad y colonia.</p></details>
+      <details><summary>¿Quién responde si el repartidor no entrega?</summary><p>Se abre una disputa y se revisa la bitácora del pedido. Quien no cumple pierde su reputación y puede quedar fuera de la red.</p></details>
+      <details><summary>¿Necesito una app?</summary><p>Para la prueba funciona desde el navegador del celular. El registro es con tu número y un código por SMS.</p></details>
+      <details><summary>¿Por qué código abierto?</summary><p>Para que cualquiera pueda revisar cómo funciona, proponer mejoras o montar su propia red en su ciudad.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="join" id="unete">
+  <div class="wrap grid">
+    <div>
+      <span class="eyebrow">Únete a la prueba</span>
+      <h2 style="margin-top:12px">Déjanos tu celular y te avisamos cuando arranque en tu zona</h2>
+      <p class="muted" style="margin-top:16px">Toma un minuto. No vendemos tus datos ni te vamos a llenar de mensajes: solo te escribimos para invitarte a la prueba.</p>
+    </div>
+    <form id="form" novalidate>
+      <div class="seg" role="radiogroup" aria-label="Cómo quieres participar">
+        <label><input type="radio" name="perfil" value="repartidor" id="p_rep" checked><span>Quiero repartir</span></label>
+        <label><input type="radio" name="perfil" value="cliente" id="p_cli"><span>Quiero enviar o pedir</span></label>
+      </div>
+      <div class="fields">
+        <label class="f"><span>Nombre</span><input type="text" id="nombre" name="nombre" autocomplete="name" maxlength="80" required></label>
+        <label class="f"><span>Celular</span><input type="tel" id="celular" name="celular" inputmode="numeric" autocomplete="tel-national" maxlength="14" placeholder="10 dígitos" required></label>
+        <label class="f"><span>Ciudad</span><input type="text" id="ciudad" name="ciudad" autocomplete="address-level2" maxlength="80" required></label>
+        <label class="f"><span>Colonia</span><input type="text" id="colonia" name="colonia" maxlength="80"><small>Opcional, ayuda a ver dónde arrancar</small></label>
+      </div>
+
+      <div data-for="repartidor" class="fields">
+        <fieldset class="f full"><legend>¿En qué repartirías?</legend><div class="opts">
+          <label><input type="radio" name="vehiculo" value="moto"><span>Moto</span></label>
+          <label><input type="radio" name="vehiculo" value="bici"><span>Bici</span></label>
+          <label><input type="radio" name="vehiculo" value="auto"><span>Auto</span></label>
+          <label><input type="radio" name="vehiculo" value="a_pie"><span>A pie</span></label></div></fieldset>
+        <fieldset class="f full"><legend>¿Cuándo podrías?</legend><div class="opts">
+          <label><input type="checkbox" name="horario" value="mananas"><span>Mañanas</span></label>
+          <label><input type="checkbox" name="horario" value="tardes"><span>Tardes</span></label>
+          <label><input type="checkbox" name="horario" value="noches"><span>Noches</span></label>
+          <label><input type="checkbox" name="horario" value="fines"><span>Fines de semana</span></label></div></fieldset>
+        <fieldset class="f full"><legend>¿Ya repartes en alguna app?</legend><div class="opts">
+          <label><input type="radio" name="ya_reparte" value="si"><span>Sí</span></label>
+          <label><input type="radio" name="ya_reparte" value="no"><span>No</span></label></div></fieldset>
+      </div>
+
+      <div data-for="cliente" class="fields" hidden>
+        <fieldset class="f full"><legend>¿Eres persona o negocio?</legend><div class="opts">
+          <label><input type="radio" name="tipo" value="persona"><span>Persona</span></label>
+          <label><input type="radio" name="tipo" value="negocio"><span>Negocio</span></label></div></fieldset>
+        <label class="f full" data-negocio hidden><span>Nombre del negocio</span><input type="text" id="negocio" name="negocio" maxlength="80"></label>
+        <fieldset class="f full"><legend>¿Qué enviarías?</legend><div class="opts">
+          <label><input type="checkbox" name="envios" value="comida"><span>Comida</span></label>
+          <label><input type="checkbox" name="envios" value="ventas_linea"><span>Ventas en línea</span></label>
+          <label><input type="checkbox" name="envios" value="mandados"><span>Mandados y compras</span></label>
+          <label><input type="checkbox" name="envios" value="paquetes"><span>Paquetes y documentos</span></label></div></fieldset>
+        <fieldset class="f full"><legend>¿Qué tan seguido?</legend><div class="opts">
+          <label><input type="radio" name="frecuencia" value="diario"><span>Casi diario</span></label>
+          <label><input type="radio" name="frecuencia" value="semanal"><span>Cada semana</span></label>
+          <label><input type="radio" name="frecuencia" value="ocasional"><span>De vez en cuando</span></label></div></fieldset>
+      </div>
+
+      <div class="hp" aria-hidden="true"><label>Sitio web <input type="text" id="sitio" name="sitio" tabindex="-1" autocomplete="off"></label></div>
+      <label class="consent"><input type="checkbox" id="acepto" required><span>Acepto que me contacten por WhatsApp o SMS para invitarme a la prueba, según el <a href="#privacidad">aviso de privacidad</a>.</span></label>
+      <div id="msg" class="msg" role="status" hidden></div>
+      <button class="btn vest" type="submit" id="enviar">Registrarme</button>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer id="privacidad">
+  <div class="wrap">
+    <h3>Aviso de privacidad (resumen)</h3>
+    <p>Encargo es un proyecto independiente y de código abierto en etapa de prueba. Con este formulario recabamos tu nombre, celular, ciudad, colonia y respuestas sobre cómo participarías. Los usamos solo para medir el interés por zona y contactarte para invitarte a la prueba. No los vendemos ni los compartimos con terceros, y los borramos al terminar la etapa de prueba o antes si lo pides respondiendo BAJA a cualquier mensaje que te enviemos.</p>
+    <p>Encargo es un nombre temporal. Un proyecto de <a href="/">rigo9412</a>.</p>
+  </div>
+</footer>
+
+<script src="config.js"></script>
+<script>
+(function(){
+  var form=document.getElementById("form"),msg=document.getElementById("msg"),btn=document.getElementById("enviar");
+  var cfg=window.ENCARGO_CONFIG||{};
+  var qs=new URLSearchParams(location.search);
+  var fuente=(qs.get("utm_source")||qs.get("src")||qs.get("ref")||"").slice(0,60)||null;
+
+  function perfil(){return form.querySelector("input[name=perfil]:checked").value}
+  function sync(){
+    var p=perfil();
+    form.querySelectorAll("[data-for]").forEach(function(el){el.hidden=el.getAttribute("data-for")!==p});
+    var neg=form.querySelector("input[name=tipo][value=negocio]");
+    form.querySelector("[data-negocio]").hidden=!(p==="cliente"&&neg.checked);
+  }
+  form.addEventListener("change",sync);sync();
+
+  document.querySelectorAll("a[data-perfil]").forEach(function(a){
+    a.addEventListener("click",function(){
+      var r=document.getElementById(a.getAttribute("data-perfil")==="repartidor"?"p_rep":"p_cli");r.checked=true;sync();
+      setTimeout(function(){document.getElementById("nombre").focus({preventScroll:true})},450);
+    });
+  });
+
+  function show(text,ok){msg.textContent=text;msg.className="msg "+(ok?"ok":"err");msg.hidden=false}
+  function val(name){var el=form.querySelector("input[name="+name+"]:checked");return el?el.value:null}
+  function vals(name){return Array.prototype.map.call(form.querySelectorAll("input[name="+name+"]:checked"),function(e){return e.value})}
+
+  form.addEventListener("submit",function(e){
+    e.preventDefault();msg.hidden=true;
+    if(document.getElementById("sitio").value){show("¡Listo! Te avisamos cuando arranque la prueba.",true);return}
+    var nombre=document.getElementById("nombre").value.trim();
+    var cel=document.getElementById("celular").value.replace(/\D/g,"");
+    if(cel.length===12&&cel.indexOf("52")===0)cel=cel.slice(2);
+    var ciudad=document.getElementById("ciudad").value.trim();
+    var colonia=document.getElementById("colonia").value.trim()||null;
+    if(nombre.length<2){show("Escribe tu nombre.",false);document.getElementById("nombre").focus();return}
+    if(cel.length!==10){show("El celular debe tener 10 dígitos.",false);document.getElementById("celular").focus();return}
+    if(ciudad.length<2){show("Escribe tu ciudad.",false);document.getElementById("ciudad").focus();return}
+    if(!document.getElementById("acepto").checked){show("Marca la casilla para que podamos contactarte.",false);return}
+    var p=perfil();
+    var detalles=p==="repartidor"
+      ?{vehiculo:val("vehiculo"),horario:vals("horario"),ya_reparte:val("ya_reparte")}
+      :{tipo:val("tipo"),negocio:(document.getElementById("negocio").value.trim()||null),envios:vals("envios"),frecuencia:val("frecuencia")};
+    var row={perfil:p,nombre:nombre,celular:cel,ciudad:ciudad,colonia:colonia,detalles:detalles,fuente:fuente,acepta_contacto:true};
+
+    if(!cfg.supabaseUrl||!cfg.supabaseAnonKey){show("Vista previa: el registro todavía no está conectado, así que no se guardó nada.",false);return}
+    btn.disabled=true;btn.textContent="Enviando…";
+    var headers={"Content-Type":"application/json","apikey":cfg.supabaseAnonKey,"Prefer":"return=minimal"};
+    if(cfg.supabaseAnonKey.indexOf("eyJ")===0)headers.Authorization="Bearer "+cfg.supabaseAnonKey;
+    fetch(cfg.supabaseUrl.replace(/\/$/,"")+"/rest/v1/"+(cfg.tabla||"interesados"),{method:"POST",headers:headers,body:JSON.stringify(row)})
+      .then(function(r){
+        if(r.ok){form.reset();sync();show("¡Listo, "+nombre.split(" ")[0]+"! Te avisamos por WhatsApp o SMS cuando arranque en tu zona.",true);return}
+        if(r.status===409){show("Ese celular ya estaba registrado con este perfil. Te avisamos cuando arranque.",true);return}
+        show("No se pudo guardar tu registro. Revisa tu conexión e inténtalo de nuevo.",false);
+      })
+      .catch(function(){show("No se pudo guardar tu registro. Revisa tu conexión e inténtalo de nuevo.",false)})
+      .finally(function(){btn.disabled=false;btn.textContent="Registrarme"});
+  });
+})();
+</script>
+</body>
+</html>
