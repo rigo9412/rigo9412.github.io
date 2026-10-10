@@ -3,6 +3,6 @@
 // Nunca pongas aquí la service_role key ni la secret key.
 window.ENCARGO_CONFIG = {
   supabaseUrl: "https://pgcydgjrkhtaiymadfvm.supabase.co",
-  supabaseAnonKey: "",   // ej. eyJhbGciOi... o sb_publishable_...
+  supabaseAnonKey: "sb_publishable_dBBZ1FO4wvGBjnk5mvoOeA_PCr_lqPO",
   tabla: "interesados"
 };
