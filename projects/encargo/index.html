@@ -1,0 +1,111 @@
+<!DOCTYPE html><html lang="en"> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v5.1.7"><!-- Font preloads --><link rel="preload" href="/_astro/inter-latin-400-normal.BOOGhInR.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/_astro/inter-latin-600-normal.D273HNI0.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/_astro/lora-latin-400-normal.CvHVDnm4.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/_astro/lora-latin-600-normal.DUWh3m6k.woff2" as="font" type="font/woff2" crossorigin><!-- Canonical URL --><link rel="canonical" href="https://rigo9412.github.io/projects/encargo/"><!-- Primary Meta Tags --><title>Encargo | Rigoberto Ramos Aparicio</title><meta name="title" content="Encargo | Rigoberto Ramos Aparicio"><meta name="description" content="An open delivery network with zero commissions: post what you need delivered, a nearby courier takes it and you pay them directly."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://rigo9412.github.io/projects/encargo/"><meta property="og:title" content="Encargo | Rigoberto Ramos Aparicio"><meta property="og:description" content="An open delivery network with zero commissions: post what you need delivered, a nearby courier takes it and you pay them directly."><meta property="og:image" content="https://rigo9412.github.io/images/encargo.png"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://rigo9412.github.io/projects/encargo/"><meta property="twitter:title" content="Encargo | Rigoberto Ramos Aparicio"><meta property="twitter:description" content="An open delivery network with zero commissions: post what you need delivered, a nearby courier takes it and you pay them directly."><meta property="twitter:image" content="https://rigo9412.github.io/images/encargo.png"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.rasoniT7.js"></script><script type="module">document.addEventListener("astro:before-swap",e=>[...e.newDocument.head.querySelectorAll('link[as="font"]')].forEach(o=>o.remove()));</script><script>
+  function init() {
+    preloadTheme();
+    onScroll();
+    animate();
+
+    const backToTop = document.getElementById("back-to-top");
+    backToTop?.addEventListener("click", (event) => scrollToTop(event));
+
+    const backToPrev = document.getElementById("back-to-prev");
+    backToPrev?.addEventListener("click", () => window.history.back());
+
+    const themeButton = document.getElementById("theme-button");
+    themeButton?.addEventListener("click", () => {
+      const dark = !document.documentElement.classList.contains("dark");
+      localStorage.setItem("theme", dark ? "dark" : "light");
+      toggleTheme(dark);
+    });
+
+    window.matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", event => {
+        if (localStorage.theme !== "light" && localStorage.theme !== "dark") {
+          toggleTheme(event.matches);
+        }
+      }
+    );
+
+    document.addEventListener("scroll", onScroll);
+  }
+
+  function animate() {
+    const animateElements = document.querySelectorAll(".animate");
+
+    animateElements.forEach((element, index) => {
+      setTimeout(() => {
+        element.classList.add("show");
+      }, index * 150);
+    });
+  }
+
+  function onScroll() {
+    if (window.scrollY > 0) {
+      document.documentElement.classList.add("scrolled");
+    } else {
+      document.documentElement.classList.remove("scrolled");
+    }
+  }
+
+  function scrollToTop(event) {
+    event.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  }
+
+function toggleTheme(dark) {
+    const css = document.createElement("style");
+
+    css.appendChild(
+      document.createTextNode(
+        `* {
+             -webkit-transition: none !important;
+             -moz-transition: none !important;
+             -o-transition: none !important;
+             -ms-transition: none !important;
+             transition: none !important;
+          }
+        `,
+      )
+    );
+
+    document.head.appendChild(css);
+
+    if (dark) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+
+  window.getComputedStyle(css).opacity;
+    document.head.removeChild(css);
+  }
+
+  function preloadTheme() {
+    const userTheme = localStorage.theme;
+
+    if (userTheme === "light" || userTheme === "dark") {
+      toggleTheme(userTheme === "dark");
+    } else {
+      toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => init());
+  document.addEventListener("astro:after-swap", () => init());
+  preloadTheme();
+</script><link rel="stylesheet" href="/_astro/index.BF1lFR_h.css"></head> <body> <header> <div class="mx-auto px-5 max-w-4xl">  <div class="flex items-center justify-between gap-4"> <a href="/" class="flex items-center gap-2 font-semibold text-stone-900 dark:text-white" aria-label="Home"> <span class="grid size-8 place-items-center rounded-lg bg-accent text-xs font-bold text-white dark:text-stone-950">RR</span> <span class="hidden sm:inline">Rigo Ramos</span> </a> <nav class="flex items-center gap-1 text-sm"> <a href="/projects" class="rounded-full px-3 py-1.5 transition-colors hover:text-stone-900 dark:hover:text-white text-stone-900 dark:text-white bg-black/5 dark:bg-white/10"> Projects </a><a href="/work" class="rounded-full px-3 py-1.5 transition-colors hover:text-stone-900 dark:hover:text-white"> Work </a><a href="/#contact" class="rounded-full px-3 py-1.5 transition-colors hover:text-stone-900 dark:hover:text-white"> Contact </a> <button id="theme-button" aria-label="Toggle theme" class="ml-1 grid size-8 place-items-center rounded-full hover:bg-black/5 hover:text-stone-900 dark:hover:bg-white/10 dark:hover:text-white transition-colors"> <svg class="size-[18px] dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path> </svg> <svg class="size-[18px] hidden dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <circle cx="12" cy="12" r="5"></circle> <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path> </svg> </button> </nav> </div>  </div> </header> <main>  <div class="mx-auto px-5 max-w-2xl">  <a href="/projects" class="animate inline-flex items-center gap-1 text-sm hover:text-stone-900 dark:hover:text-white transition-colors">
+← All projects
+</a> <div class="animate mt-8"> <div class="font-mono text-xs text-stone-500">2026</div> <h1 class="mt-2 text-3xl font-semibold tracking-tight text-stone-900 dark:text-white sm:text-4xl">Encargo</h1> <p class="mt-4 text-lg">An open delivery network with zero commissions: post what you need delivered, a nearby courier takes it and you pay them directly.</p> <ul class="mt-5 flex flex-wrap gap-1.5"> <li class="chip">Product</li><li class="chip">Landing</li><li class="chip">Supabase</li> </ul> <div class="mt-6 flex flex-wrap gap-3"> <a href="https://rigo9412.github.io/encargo/" target="_blank" rel="noopener" class="btn-primary">Live demo ↗</a>  </div> </div> <article class="animate mt-10 border-t border-black/5 pt-10 dark:border-white/10"> <p><img src="/images/encargo.png" alt="Encargo"></p>
+<p>Encargo is a product experiment for local deliveries without platform fees. Customers post an order, a nearby courier picks it up, and payment goes straight to the courier.</p>
+<p>The current stage is a landing page that measures interest from couriers and customers, with sign-ups stored in Supabase, to validate demand before building the full app.</p>
+<h2 id="planned-features">Planned features</h2>
+<ul>
+<li>Real-time order tracking.</li>
+<li>Courier reputation and reviews.</li>
+<li>Order audit log for both sides.</li>
+<li>Dashboard for couriers to manage their deliveries.</li>
+</ul> </article>  </div>  </main> <footer> <div class="mx-auto px-5 max-w-4xl">  <div class="flex flex-col-reverse gap-4 sm:flex-row sm:items-center sm:justify-between"> <div>© 2026 Rigoberto Ramos Aparicio</div> <div class="flex flex-wrap items-center gap-4"> <a href="https://github.com/rigo9412" target="_blank" rel="noopener" class="hover:text-stone-900 dark:hover:text-white transition-colors"> GitHub </a><a href="https://www.linkedin.com/in/rigobertoramosaparicio" target="_blank" rel="noopener" class="hover:text-stone-900 dark:hover:text-white transition-colors"> LinkedIn </a><a href="/cv.pdf" target="_blank" rel="noopener" class="hover:text-stone-900 dark:hover:text-white transition-colors"> CV </a> <button id="back-to-top" class="relative group w-fit flex pl-8 pr-3 py-1.5 flex-nowrap rounded-full border border-black/15 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute top-1/2 left-2 -translate-y-1/2 size-4 stroke-2 fill-none stroke-current rotate-90"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 group-hover:translate-x-0 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 group-hover:translate-x-0 transition-transform duration-300 ease-in-out"></polyline> </svg> <div class="text-sm">
+Back to top
+</div> </button> </div> </div>  </div> </footer> </body></html>

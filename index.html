@@ -1,23 +1,113 @@
-<!doctype html>
-<html lang="es">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>rigo9412</title>
-  <style>
-    :root { color-scheme: light dark; }
-    body { margin: 0; font: 16px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif; }
-    main { max-width: 720px; margin: 0 auto; padding: 48px 16px; }
-  </style>
-</head>
-<body>
-  <main>
-    <h1>rigo9412</h1>
-    <ul>
-      <li><a href="/contabilizate-extension/">Contabilizate</a>: extensión de Chrome para facturar en el portal del SAT
-        (<a href="/contabilizate-extension/privacy.html">política de privacidad</a>).</li>
-      <li><a href="/encargo/">Encargo</a>: red abierta de pedidos y entregas, sin comisiones (registro de interés).</li>
-    </ul>
-  </main>
-</body>
-</html>
+<!DOCTYPE html><html lang="en"> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v5.1.7"><!-- Font preloads --><link rel="preload" href="/_astro/inter-latin-400-normal.BOOGhInR.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/_astro/inter-latin-600-normal.D273HNI0.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/_astro/lora-latin-400-normal.CvHVDnm4.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/_astro/lora-latin-600-normal.DUWh3m6k.woff2" as="font" type="font/woff2" crossorigin><!-- Canonical URL --><link rel="canonical" href="https://rigo9412.github.io/"><!-- Primary Meta Tags --><title>Full Stack &amp; Mobile Developer | Rigoberto Ramos Aparicio</title><meta name="title" content="Full Stack &#38; Mobile Developer | Rigoberto Ramos Aparicio"><meta name="description" content="Rigoberto Ramos Aparicio, full stack and mobile developer from Nuevo Laredo, Mexico. Next.js, Flutter, TypeScript and .NET."><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://rigo9412.github.io/"><meta property="og:title" content="Full Stack &#38; Mobile Developer | Rigoberto Ramos Aparicio"><meta property="og:description" content="Rigoberto Ramos Aparicio, full stack and mobile developer from Nuevo Laredo, Mexico. Next.js, Flutter, TypeScript and .NET."><meta property="og:image" content="https://rigo9412.github.io/images/contabilizate-extension.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://rigo9412.github.io/"><meta property="twitter:title" content="Full Stack &#38; Mobile Developer | Rigoberto Ramos Aparicio"><meta property="twitter:description" content="Rigoberto Ramos Aparicio, full stack and mobile developer from Nuevo Laredo, Mexico. Next.js, Flutter, TypeScript and .NET."><meta property="twitter:image" content="https://rigo9412.github.io/images/contabilizate-extension.jpg"><meta name="astro-view-transitions-enabled" content="true"><meta name="astro-view-transitions-fallback" content="animate"><script type="module" src="/_astro/ClientRouter.astro_astro_type_script_index_0_lang.rasoniT7.js"></script><script type="module">document.addEventListener("astro:before-swap",e=>[...e.newDocument.head.querySelectorAll('link[as="font"]')].forEach(o=>o.remove()));</script><script>
+  function init() {
+    preloadTheme();
+    onScroll();
+    animate();
+
+    const backToTop = document.getElementById("back-to-top");
+    backToTop?.addEventListener("click", (event) => scrollToTop(event));
+
+    const backToPrev = document.getElementById("back-to-prev");
+    backToPrev?.addEventListener("click", () => window.history.back());
+
+    const themeButton = document.getElementById("theme-button");
+    themeButton?.addEventListener("click", () => {
+      const dark = !document.documentElement.classList.contains("dark");
+      localStorage.setItem("theme", dark ? "dark" : "light");
+      toggleTheme(dark);
+    });
+
+    window.matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", event => {
+        if (localStorage.theme !== "light" && localStorage.theme !== "dark") {
+          toggleTheme(event.matches);
+        }
+      }
+    );
+
+    document.addEventListener("scroll", onScroll);
+  }
+
+  function animate() {
+    const animateElements = document.querySelectorAll(".animate");
+
+    animateElements.forEach((element, index) => {
+      setTimeout(() => {
+        element.classList.add("show");
+      }, index * 150);
+    });
+  }
+
+  function onScroll() {
+    if (window.scrollY > 0) {
+      document.documentElement.classList.add("scrolled");
+    } else {
+      document.documentElement.classList.remove("scrolled");
+    }
+  }
+
+  function scrollToTop(event) {
+    event.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  }
+
+function toggleTheme(dark) {
+    const css = document.createElement("style");
+
+    css.appendChild(
+      document.createTextNode(
+        `* {
+             -webkit-transition: none !important;
+             -moz-transition: none !important;
+             -o-transition: none !important;
+             -ms-transition: none !important;
+             transition: none !important;
+          }
+        `,
+      )
+    );
+
+    document.head.appendChild(css);
+
+    if (dark) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+
+  window.getComputedStyle(css).opacity;
+    document.head.removeChild(css);
+  }
+
+  function preloadTheme() {
+    const userTheme = localStorage.theme;
+
+    if (userTheme === "light" || userTheme === "dark") {
+      toggleTheme(userTheme === "dark");
+    } else {
+      toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => init());
+  document.addEventListener("astro:after-swap", () => init());
+  preloadTheme();
+</script><link rel="stylesheet" href="/_astro/index.BF1lFR_h.css"></head> <body> <header> <div class="mx-auto px-5 max-w-4xl">  <div class="flex items-center justify-between gap-4"> <a href="/" class="flex items-center gap-2 font-semibold text-stone-900 dark:text-white" aria-label="Home"> <span class="grid size-8 place-items-center rounded-lg bg-accent text-xs font-bold text-white dark:text-stone-950">RR</span> <span class="hidden sm:inline">Rigo Ramos</span> </a> <nav class="flex items-center gap-1 text-sm"> <a href="/projects" class="rounded-full px-3 py-1.5 transition-colors hover:text-stone-900 dark:hover:text-white"> Projects </a><a href="/work" class="rounded-full px-3 py-1.5 transition-colors hover:text-stone-900 dark:hover:text-white"> Work </a><a href="/#contact" class="rounded-full px-3 py-1.5 transition-colors hover:text-stone-900 dark:hover:text-white"> Contact </a> <button id="theme-button" aria-label="Toggle theme" class="ml-1 grid size-8 place-items-center rounded-full hover:bg-black/5 hover:text-stone-900 dark:hover:bg-white/10 dark:hover:text-white transition-colors"> <svg class="size-[18px] dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path> </svg> <svg class="size-[18px] hidden dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <circle cx="12" cy="12" r="5"></circle> <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path> </svg> </button> </nav> </div>  </div> </header> <main>  <div class="mx-auto px-5 max-w-4xl">   <section class="relative pb-20 pt-8 sm:pt-16"> <div aria-hidden="true" class="pointer-events-none absolute -top-24 left-1/2 -z-10 h-72 w-[36rem] -translate-x-1/2 rounded-full bg-accent/20 blur-3xl dark:bg-accent/10"></div> <p class="animate inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/60 px-3 py-1 text-xs font-medium dark:border-white/10 dark:bg-white/5"> <span class="relative flex size-2"> <span class="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-60"></span> <span class="relative inline-flex size-2 rounded-full bg-accent"></span> </span>
+Open to freelance & remote work
+</p> <h1 class="animate mt-6 text-4xl font-semibold tracking-tight text-stone-900 dark:text-white sm:text-6xl">
+Hi, I'm Rigo.<br> <span class="text-stone-400 dark:text-stone-500">I build products for web, mobile</span> <span class="text-accent">and the browser.</span> </h1> <p class="animate mt-6 max-w-2xl text-lg leading-relaxed">
+Full stack and mobile developer from Nuevo Laredo, Mexico, with 8+ years shipping apps
+        with Next.js, Flutter, TypeScript and .NET. Lately I build tools that automate tedious
+        work: tax invoicing, writing assistance and AI integrations through MCP.
+</p> <div class="animate mt-8 flex flex-wrap gap-3"> <a href="/projects" class="btn-primary">
+View projects
+<svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"></path></svg> </a> <a href="/cv.pdf" target="_blank" rel="noopener" class="btn-ghost">Download CV</a> <a href="https://github.com/rigo9412" target="_blank" rel="noopener" class="btn-ghost" aria-label="GitHub"> <svg class="size-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.9 1.2 1.9 1.2 1.1 1.9 2.9 1.3 3.6 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.7 18.3 5 18.3 5c.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5Z"></path></svg>
+GitHub
+</a> <a href="https://www.linkedin.com/in/rigobertoramosaparicio" target="_blank" rel="noopener" class="btn-ghost">LinkedIn</a> </div> </section>  <section class="animate border-y border-black/5 py-8 dark:border-white/10"> <h2 class="section-title">Tech I work with</h2> <ul class="mt-4 flex flex-wrap gap-2"> <li class="chip text-sm">TypeScript</li><li class="chip text-sm">Next.js</li><li class="chip text-sm">React</li><li class="chip text-sm">Hono</li><li class="chip text-sm">Flutter</li><li class="chip text-sm">Kotlin</li><li class="chip text-sm">.NET</li><li class="chip text-sm">Node.js</li><li class="chip text-sm">PostgreSQL</li><li class="chip text-sm">SQLite / Turso</li><li class="chip text-sm">Strapi</li><li class="chip text-sm">Chrome Extensions</li><li class="chip text-sm">MCP / AI tooling</li> </ul> </section>  <section class="animate py-20"> <div class="flex items-end justify-between gap-4"> <div> <h2 class="section-title">Featured projects</h2> <p class="mt-2 text-2xl font-semibold tracking-tight text-stone-900 dark:text-white">Things I've built recently</p> </div> <a href="/projects" class="shrink-0 text-sm font-medium text-accent hover:underline underline-offset-4">All projects →</a> </div> <ul class="mt-8 grid gap-5 sm:grid-cols-2"> <li><a href="/projects/encargo/" class="group flex h-full flex-col overflow-hidden rounded-2xl border border-black/10 bg-white transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-lg hover:shadow-black/5 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-accent/40"> <div class="aspect-[16/9] overflow-hidden border-b border-black/5 bg-stone-100 dark:border-white/10 dark:bg-stone-900"> <img src="/images/encargo.png" alt="" loading="lazy" class="size-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"> </div> <div class="flex flex-1 flex-col gap-3 p-5"> <div class="flex items-start justify-between gap-3"> <h3 class="font-semibold text-stone-900 dark:text-white">Encargo</h3> <span class="shrink-0 font-mono text-xs text-stone-400">2026</span> </div> <p class="line-clamp-3 text-sm">An open delivery network with zero commissions: post what you need delivered, a nearby courier takes it and you pay them directly.</p> <ul class="mt-auto flex flex-wrap gap-1.5 pt-2"> <li class="chip">Product</li><li class="chip">Landing</li><li class="chip">Supabase</li> </ul> </div> </a></li><li><a href="/projects/contabilizate-extension/" class="group flex h-full flex-col overflow-hidden rounded-2xl border border-black/10 bg-white transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-lg hover:shadow-black/5 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-accent/40"> <div class="aspect-[16/9] overflow-hidden border-b border-black/5 bg-stone-100 dark:border-white/10 dark:bg-stone-900"> <img src="/images/contabilizate-extension.jpg" alt="" loading="lazy" class="size-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"> </div> <div class="flex flex-1 flex-col gap-3 p-5"> <div class="flex items-start justify-between gap-3"> <h3 class="font-semibold text-stone-900 dark:text-white">Contabilizate Extension</h3> <span class="shrink-0 font-mono text-xs text-stone-400">2026</span> </div> <p class="line-clamp-3 text-sm">Chrome extension that automates invoicing (CFDI) on the Mexican SAT portal, with a monthly tax dashboard and credit card spending analysis.</p> <ul class="mt-auto flex flex-wrap gap-1.5 pt-2"> <li class="chip">Chrome Extension</li><li class="chip">TypeScript</li><li class="chip">React</li><li class="chip">Manifest V3</li> </ul> </div> </a></li><li><a href="/projects/escribe-claro/" class="group flex h-full flex-col overflow-hidden rounded-2xl border border-black/10 bg-white transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-lg hover:shadow-black/5 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-accent/40"> <div class="aspect-[16/9] overflow-hidden border-b border-black/5 bg-stone-100 dark:border-white/10 dark:bg-stone-900"> <img src="/images/escribe-claro.png" alt="" loading="lazy" class="size-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"> </div> <div class="flex flex-1 flex-col gap-3 p-5"> <div class="flex items-start justify-between gap-3"> <h3 class="font-semibold text-stone-900 dark:text-white">Escribe Claro</h3> <span class="shrink-0 font-mono text-xs text-stone-400">2026</span> </div> <p class="line-clamp-3 text-sm">A Grammarly-style Spanish writing assistant built for people with dyslexia and for the US–Mexico border, where Spanglish is everyday language.</p> <ul class="mt-auto flex flex-wrap gap-1.5 pt-2"> <li class="chip">Browser Extension</li><li class="chip">JavaScript</li><li class="chip">NLP</li><li class="chip">Accessibility</li> </ul> </div> </a></li><li><a href="/projects/project-1/" class="group flex h-full flex-col overflow-hidden rounded-2xl border border-black/10 bg-white transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-lg hover:shadow-black/5 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-accent/40"> <div class="aspect-[16/9] overflow-hidden border-b border-black/5 bg-stone-100 dark:border-white/10 dark:bg-stone-900"> <img src="/images/contabilizate.jpeg" alt="" loading="lazy" class="size-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"> </div> <div class="flex flex-1 flex-col gap-3 p-5"> <div class="flex items-start justify-between gap-3"> <h3 class="font-semibold text-stone-900 dark:text-white">Contabilizate</h3> <span class="shrink-0 font-mono text-xs text-stone-400">2024</span> </div> <p class="line-clamp-3 text-sm">Accounting system for RESICO and individual taxpayers in Mexico: downloads invoices and calculates monthly taxes automatically.</p> <ul class="mt-auto flex flex-wrap gap-1.5 pt-2"> <li class="chip">Next.js</li><li class="chip">Hono</li><li class="chip">Turso</li><li class="chip">Drizzle</li> </ul> </div> </a></li> </ul> </section>  <section class="animate pb-20"> <div class="flex items-end justify-between gap-4"> <div> <h2 class="section-title">Experience</h2> <p class="mt-2 text-2xl font-semibold tracking-tight text-stone-900 dark:text-white">Where I've worked</p> </div> <a href="/work" class="shrink-0 text-sm font-medium text-accent hover:underline underline-offset-4">Full history →</a> </div> <ol class="mt-8 divide-y divide-black/5 rounded-2xl border border-black/10 bg-white dark:divide-white/10 dark:border-white/10 dark:bg-white/[0.03]"> <li class="flex flex-col gap-1 p-5 sm:flex-row sm:items-center sm:justify-between"> <div> <div class="font-semibold text-stone-900 dark:text-white">Full Stack Developer</div> <div class="text-sm">Transferr</div> </div> <div class="flex items-center gap-2 font-mono text-xs text-stone-500">  Jan 2020 — Jul 2024 </div> </li><li class="flex flex-col gap-1 p-5 sm:flex-row sm:items-center sm:justify-between"> <div> <div class="font-semibold text-stone-900 dark:text-white">Full Stack Developer</div> <div class="text-sm">Freelancer</div> </div> <div class="flex items-center gap-2 font-mono text-xs text-stone-500"> <span class="size-1.5 rounded-full bg-accent"></span> Jan 2020 — Current </div> </li><li class="flex flex-col gap-1 p-5 sm:flex-row sm:items-center sm:justify-between"> <div> <div class="font-semibold text-stone-900 dark:text-white">Systems Coordinator</div> <div class="text-sm">Instituto Tecnológico de Nuevo Laredo</div> </div> <div class="flex items-center gap-2 font-mono text-xs text-stone-500"> <span class="size-1.5 rounded-full bg-accent"></span> Apr 2019 — Current </div> </li> </ol> </section>  <section id="contact" class="animate"> <div class="relative overflow-hidden rounded-3xl bg-stone-900 px-6 py-12 text-center text-stone-300 sm:px-12 dark:bg-white/[0.04] dark:ring-1 dark:ring-white/10"> <div aria-hidden="true" class="pointer-events-none absolute -bottom-24 left-1/2 h-48 w-96 -translate-x-1/2 rounded-full bg-accent/30 blur-3xl"></div> <h2 class="text-2xl font-semibold tracking-tight text-white sm:text-3xl">Let's build something together</h2> <p class="mx-auto mt-3 max-w-md">
+Have a project in mind, a role to fill or just want to say hi? My inbox is open.
+</p> <a href="mailto:rigo.ramos.9412@gmail.com" class="btn mt-8 bg-accent text-white hover:opacity-90 dark:text-stone-950"> rigo.ramos.9412@gmail.com </a> </div> </section>  </div>  </main> <footer> <div class="mx-auto px-5 max-w-4xl">  <div class="flex flex-col-reverse gap-4 sm:flex-row sm:items-center sm:justify-between"> <div>© 2026 Rigoberto Ramos Aparicio</div> <div class="flex flex-wrap items-center gap-4"> <a href="https://github.com/rigo9412" target="_blank" rel="noopener" class="hover:text-stone-900 dark:hover:text-white transition-colors"> GitHub </a><a href="https://www.linkedin.com/in/rigobertoramosaparicio" target="_blank" rel="noopener" class="hover:text-stone-900 dark:hover:text-white transition-colors"> LinkedIn </a><a href="/cv.pdf" target="_blank" rel="noopener" class="hover:text-stone-900 dark:hover:text-white transition-colors"> CV </a> <button id="back-to-top" class="relative group w-fit flex pl-8 pr-3 py-1.5 flex-nowrap rounded-full border border-black/15 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="absolute top-1/2 left-2 -translate-y-1/2 size-4 stroke-2 fill-none stroke-current rotate-90"> <line x1="5" y1="12" x2="19" y2="12" class="translate-x-2 group-hover:translate-x-0 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"></line> <polyline points="12 5 5 12 12 19" class="translate-x-1 group-hover:translate-x-0 transition-transform duration-300 ease-in-out"></polyline> </svg> <div class="text-sm">
+Back to top
+</div> </button> </div> </div>  </div> </footer> </body></html>
